@@ -1,0 +1,273 @@
+\NeedsTeXFormat{LaTeX2e}
+
+%
+% Variational lambda calculus definitions.
+%
+\ProvidesPackage{vlc}
+
+\RequirePackage{etoolbox}
+\RequirePackage{lambda}
+\RequirePackage{cc}
+
+% make the sharing environment optional
+\newtoggle{ShareEnv}
+\toggletrue{ShareEnv}
+\DeclareOption{noshare}{\togglefalse{ShareEnv}}
+\ProcessOptions
+
+
+%
+% Lambda Calculus
+%
+
+% constants
+\newcommand{\cMeta}{\OB{c}}
+
+% abstraction
+\newcommand{\lam}[2]{\OB{\lambda#1.#2}}
+\newcommand{\lamp}[2]{\lam{\prog{#1}}{\prog{#2}}}
+
+% application
+\newcommand{\app}[2]{\OB{#1~#2}}
+
+% tuples
+\newcommand{\tup}[2]{\lam{f}{\app{\app{f}{#1}}{#2}}}
+
+% some values
+\newcommand{\id}{\prog{id}}
+\newcommand{\suc}{\prog{succ}}
+\newcommand{\tru}{\prog{true}}
+\newcommand{\fls}{\prog{false}}
+
+
+%
+% Variational Types and Selectors
+%
+
+% type constants
+\newcommand{\tyc}{\OB{\tau}}
+\newcommand{\Int}{\prog{Int}}
+\newcommand{\Bool}{\prog{Bool}}
+\newcommand{\Char}{\prog{Char}}
+
+% function types
+\newcommand{\fun}[2]{\OB{#1\to#2}}
+
+% tuple types
+\newcommand{\tupt}[2]{\fun{(\fun{\fun{#1}{#2}}{a})}{a}}
+
+% qualification metavariable
+\newcommand{\qm}{\OB{q}}
+
+% qualified type variables
+\newcommand{\qv}[2]{\OB{#1_{#2}}}
+
+% selectors
+\newcommand{\fst}[1]{\OB{#1}}
+\newcommand{\snd}[1]{\OB{\tilde{#1}}}
+
+% constructing qualifications
+\newcommand{\qemp}{\OB{\epsilon}}
+\newcommand{\qcons}[2]{\OB{#1#2}}
+\newcommand{\qcf}[2]{\qcons{\fst{#1}}{#2}}
+\newcommand{\qcs}[2]{\qcons{\snd{#1}}{#2}}
+
+% shortcuts for qualified type variables up to choice-nesting level of two
+\newcommand{\qf}[2]{\qv{#1}{\fst{#2}}}
+\newcommand{\qs}[2]{\qv{#1}{\snd{#2}}}
+\newcommand{\qfq}[3]{\qv{#1}{\qcf{#2}{#3}}}
+\newcommand{\qsq}[3]{\qv{#1}{\qcs{#2}{#3}}}
+\newcommand{\qff}[3]{\qfq{#1}{#2}{\fst{#3}}}
+\newcommand{\qfs}[3]{\qfq{#1}{#2}{\snd{#3}}}
+\newcommand{\qsf}[3]{\qsq{#1}{#2}{\fst{#3}}}
+\newcommand{\qss}[3]{\qsq{#1}{#2}{\snd{#3}}}
+
+
+
+% generic qualified variables
+\newcommand{\gqv}{\qv{a}{\qm}}
+\newcommand{\gqvf}[2][\qm]{\qfq{a}{#2}{#1}}
+\newcommand{\gqvs}[2][\qm]{\qsq{a}{#2}{#1}}
+
+% tag list (decision)
+\newcommand{\tagL}[1]{\OB{\overline{#1}}}
+
+% mapping from expression-level decisions to type-level decisions
+\newcommand{\tranF}[1]{\OB{\varphi_{#1}}}
+
+
+%
+% Environments
+%
+
+% environment names
+\newcommand{\DimEnv}{\OB{\Delta}}
+\newcommand{\TypeEnv}{\OB{\Gamma}}
+\newcommand{\ShrEnv}{\OB{\Lambda}}
+\newcommand{\optShrEnv}{\iftoggle{ShareEnv}{\OB{,\ShrEnv}}{}}
+\newcommand{\AllEnvs}{\DimEnv\optShrEnv,\TypeEnv}
+
+% constructing environments
+\newcommand{\envEmpty}{\OB{\varnothing}}
+\newcommand{\extEnv}[2]{\OB{#1\oplus#2}}
+\newcommand{\extDimEnv}[2]{\OB{\extEnv{\DimEnv}{(#1,#2)}\optShrEnv,\TypeEnv}}
+\newcommand{\extTypeEnv}[2]{\OB{\DimEnv\optShrEnv,\extEnv{\TypeEnv}{(#1,#2)}}}
+\newcommand{\extShrEnv}[2]{\OB{\DimEnv,\extEnv{\ShrEnv}{(#1,#2)},\TypeEnv}}
+
+% environment lookup
+\newcommand{\lookEnv}[3][\TypeEnv]{\OB{#1(#2)=#3}}
+\newcommand{\lookDim}[2]{\lookEnv[\DimEnv]{#1}{#2}}
+\newcommand{\lookShr}[2]{\lookEnv[\ShrEnv]{#1}{#2}}
+
+
+%
+% Type Checking
+%
+
+% judgments
+\newcommand{\ofType}[2]{\OB{#1:#2}}
+\newcommand{\hasType}[3][\AllEnvs]{\OB{#1\vdash\ofType{#2}{#3}}}
+
+% type equivalence
+\newcommand{\tyeqSym}{\OB{\equiv}}
+\newcommand{\tyeq}[2]{\OB{#1\tyeqSym#2}}
+
+% type simplification
+\newcommand{\simpSym}{\OB{\leadsto}}
+\newcommand{\simplify}[2]{\OB{#1\simpSym#2}}
+\newcommand{\nameOrder}{\OB{\preceq}}
+\newcommand{\norm}[1]{\OB{\textit{norm}(#1)}}
+
+
+%
+% Unification
+%
+
+% substitutions/unifiers
+\newcommand{\eset}{\varnothing}
+\newcommand{\map}[2]{\OB{#1 \mapsto #2}}
+
+% unifer composition
+\newcommand{\comSym}{\OB{\circ}}
+\newcommand{\com}[2]{\OB{#1\comSym#2}} 
+
+% substitution: #1=unifier, #2=type
+\newcommand{\subs}[2]{\ensuremath{#2#1}}
+
+% unification function
+\newcommand{\unifySym}{\textit{unify}}
+\newcommand{\unify}[3][{}]{\OB{\unifySym^{#1}(#2,#3)}}
+
+% unification items
+\newcommand{\uiSym}{\OB{\equiv^?}}
+\newcommand{\ui}[2]{\OB{#1\uiSym #2}}
+
+% names for unification problems
+\newcommand{\upp}{\ensuremath{U}}
+\newcommand{\qup}{\ensuremath{Q}}
+\newcommand{\supp}{\ensuremath{\sigma_\upp}}
+\newcommand{\squp}{\ensuremath{\sigma_\qup}}
+
+% unification helper functions
+\newcommand{\Robinson}{\textit{robinson}}
+\newcommand{\chcs}{\textit{choices}}
+\newcommand{\hoist}{\textit{hoist}}
+\newcommand{\occurs}{\textit{occurs}}
+\newcommand{\clift}{\textit{split}}
+\newcommand{\free}{\textit{splittable}}
+
+% unification process
+\newcommand{\lblsize}{\tiny}
+\newcommand{\mrkty}[1]{\OB{\underline{#1}}}
+\newcommand{\ustep}{\multicolumn{2}{c}{}\\ }
+\newcommand{\uconcl}{\hline\multicolumn{3}{c}{} \\[-1ex]}
+%\newcommand{\lstep}[1]{\OB{\raisebox{1pt}{{\lblsize #1}}\mathord{\downarrow}}\\ }
+\newcommand{\lstep}[2][{}]{\OB{\raisebox{1pt}{{\lblsize #2}}\mathord{\downarrow}}\hphantom{#1}\\ }
+\newcommand{\rstep}[2][{}]{&&\hphantom{#1}
+             \OB{\mathord\downarrow\raisebox{1pt}{{\lblsize #2}}}\\ }
+\newcommand{\ret}{\textrm{return}\ }
+
+% completion
+\newcommand{\compl}{\textit{comp}}
+\newcommand{\fresh}{\textit{fresh}}
+
+
+%
+% Type Inference
+%
+
+% algorithm names
+\newcommand{\inferr}{\textit{infer}}
+\newcommand{\algW}{\OB{\mathcal{W}}}
+
+
+%
+% Rule Names
+%
+
+% rule names
+\newcommand{\rn}[1]{\TirName{#1}}
+
+% type equivalency rules
+\newcommand{\FF}{\rn{Fun}}
+\newcommand{\FC}{\rn{F-C}}
+\newcommand{\CCSwap}{\rn{C-C-Swap}}
+\newcommand{\CCMerge}{\rn{C-C-Merge}}
+\newcommand{\CAlt}{\rn{Choice}}
+\newcommand{\CIdemp}{\rn{C-Idemp}}
+\newcommand{\Refl}{\rn{Refl}}
+\newcommand{\Symm}{\rn{Symm}}
+\newcommand{\Trans}{\rn{Trans}}
+
+% type simplification rules
+\newcommand{\SFArg}{\rn{S-F-Arg}}
+\newcommand{\SFRes}{\rn{S-F-Res}}
+\newcommand{\SFC}{\rn{S-F-C}}
+\newcommand{\SCSwap}{\rn{S-C-Swap}}
+\newcommand{\SCDom}{\rn{S-C-Dom}}
+\newcommand{\SCAlt}{\rn{S-C-Alt}}
+\newcommand{\SCIdemp}{\rn{S-C-Idemp}}
+
+
+%
+% Extensions
+%
+
+% new keywords
+\newcommand{\INL}{\CCkeyw{inl}}
+\newcommand{\INR}{\CCkeyw{inr}}
+\newcommand{\CASE}{\CCkeyw{case}}
+\newcommand{\OF}{\CCkeyw{of}}
+
+% new constructs
+\newcommand{\inl}[1]{\OB{\INL\ #1}}
+\newcommand{\inr}[1]{\OB{\INR\ #1}}
+\newcommand{\caset}[5]{\OB{\CASE\ #1\ \OF\ \inl{#2} \Rightarrow #3\ |\ \inr{#4} \Rightarrow #5}}
+
+% sum types
+\newcommand{\sumSym}{\OB{+}}
+\newcommand{\sumt}[2]{\OB{#1 \sumSym #2}}
+
+% new rule names
+\newcommand{\EQSUM}{\rn{Sum}}
+\newcommand{\EQSC}{\rn{S-C}}
+\newcommand{\SSUML}{\rn{S-S-L}}
+\newcommand{\SSUMR}{\rn{S-S-R}}
+\newcommand{\SSC}{\rn{S-S-C}}
+
+% added by Sheng for proof
+% #1 = substitution, #2 = type variable, #3 = corresponding type
+\newcommand{\tieq}[3]{\ensuremath{#1[#2=#3]}}
+%\newcommand{\path}{\ensuremath{p}}
+% #1 = old type #2 = new type #3=path
+\newcommand{\diver}[3]{\ensuremath{#1[#2]|_{#3}}}
+\newcommand{\disj}[2]{\ensuremath{#1 \parallel #2}}
+\newcommand{\ints}[2]{\ensuremath{#1 \not\parallel #2}}
+\newcommand{\res}[2]{\ensuremath{#1|_{#2}}}
+\newcommand{\comp}[2]{\ensuremath{#1 \vee #2}}
+\newcommand{\zip}[2]{\ensuremath{zip(#1,#2)}}
+\newcommand{\hei}[1]{\ensuremath{height(#1)}}
+\newcommand{\pos}[1]{\ensuremath{\mathcal{P}os(#1)}}
+\newcommand{\empp}{\ensuremath{\epsilon}}
+\newcommand{\rep}[3]{\ensuremath{#1[#2]|_{#3}}}
+%\newcommand{\smgl}[2]{\ensuremath{}}

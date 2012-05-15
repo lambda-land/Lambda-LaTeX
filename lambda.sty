@@ -1,0 +1,109 @@
+%
+% A collection of our commonly used LaTeX macros.
+%
+\ProvidesPackage{lambda}
+
+\RequirePackage{fancyvrb}
+
+
+%%%%%%%%%%%%%%
+% Meta notes %
+%%%%%%%%%%%%%%
+
+% \NOTE{...} produces a large, obvious black box.  Use \medskip within to break
+% up paragraphs if needed.  To make all note boxes invisible, add the following
+% line after importing this file.
+% \renewcommand{\NOTE}[1]{}
+\newlength{\dummylen}
+\newcommand{\NOTE}[1]{\setlength{\dummylen}{\fboxrule}\setlength{\fboxrule}{2pt}%
+            \vspace{1ex}\noindent\hfill%
+            \fbox{\begin{minipage}{.96\columnwidth}#1\end{minipage}}%
+            \setlength{\fboxrule}{\dummylen}\hfill{}\vspace{1ex}}
+
+% in-line comments
+\newcommand{\TODO}[1]{\ifdefined\color
+                        {\color{red}[#1]}
+                      \else
+                        {\emph{[#1]}}
+                      \fi}
+
+%%%%%%%%%%
+% Layout %
+%%%%%%%%%%
+
+% add after \begin{itemize|enumerate} for dense lists
+\def\denseitems{
+    \itemsep1pt plus1pt minus1pt
+    \parsep0pt plus0pt
+    \parskip0pt\topsep0pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Generic math stuff %
+%%%%%%%%%%%%%%%%%%%%%%
+
+% ensure math mode (what does OB stand for?)
+\def\OB#1{\ifmmode#1\else\mbox{$#1$}\fi}
+
+%% multi-line definitions
+\newcommand{\Begindef}{\ =\ \BegindefNES}
+\newcommand{\BegindefNES}{\left\{\begin{array}{@{}l@{\quad}l}}
+\newcommand{\Enddef}{\end{array}\right.}
+\newcommand{\If}{\textrm{if\ }}
+\newcommand{\Otherwise}{\textrm{otherwise}}
+
+% sets and vectors
+\newcommand{\set}[1]{\OB{\{#1\}}}
+\newcommand{\vect}[1]{\OB{\langle#1\rangle}}
+
+% enumerations and indexing
+\newcommand{\vij}[3]{\OB{#1_{#2},\ldots,#1_{#3}}}
+\newcommand{\vi}[2]{\vij{#1}{1}{#2}}
+\newcommand{\vn}[2][n]{\vi{#2}{#1}}
+\newcommand{\vnButi}[3][n]{\OB{#2_1,\ldots,#2_{#3-1},#2_{#3+1},\ldots,#2_{#1}}}
+\newcommand{\cseq}[2][n]{\OB{^{#2:1..#1}}}
+\newcommand{\iPat}[2][i]{\OB{[#1\mathop:#2]}}
+
+% domain and range of mappings
+\newcommand{\dom}[1]{\OB{\textit{dom}(#1)}}
+\newcommand{\rng}[1]{\OB{\textit{rng}(#1)}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Language design stuff %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% syntax/grammars
+\newenvironment{syntax}{\[\begin{array}{rcl@{\quad}l}}
+                       {\end{array}\]\ignorespacesafterend}
+
+% semantics
+\newcommand{\semL}{\OB{[\![}}
+\newcommand{\semR}{\OB{]\!]}}
+\newcommand{\sem}[2][{}]{\OB{\semL#2\semR_{#1}}}
+
+% substitution
+\newcommand{\subst}[3]{\OB{[#1/#2]#3}}
+
+% contexts
+\newcommand{\ctx}[2][C]{\OB{#1[#2]}}
+
+% program/code environments
+
+% renew these commands to change the size and indentation of program text
+\newcommand{\progfontsize}{\small}
+\newcommand{\progind}{\parindent}
+
+% verbatim code + latex macros
+\DefineVerbatimEnvironment{program}{Verbatim}
+   {baselinestretch=1.0,xleftmargin=\progind,fontsize=\progfontsize,
+    commandchars=\\\{\},samepage=true}
+
+% non-verbatim code
+\newenvironment{qprogram}
+   {\begin{list}{}{%
+      \setlength{\leftmargin}{\progind}}\item[]\ignorespaces}
+   {\unskip\end{list}}
+
+% in-line code
+\newcommand{\prog}[1]{{\progfontsize\texttt{#1}}}

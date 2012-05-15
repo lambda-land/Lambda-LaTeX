@@ -1,0 +1,99 @@
+%
+% Choice calculus definitions.
+%
+\ProvidesPackage{cc}
+
+\RequirePackage{lambda}
+
+
+%
+% choice calculus syntax
+%
+
+% keywords & formatting/indenting
+\newcommand{\CCkeyw}[1]{\textbf{\textrm{#1}}}
+\newcommand{\LET}{\CCkeyw{share}}
+\newcommand{\DIM}{\CCkeyw{dim}}
+\newcommand{\IN}{\CCkeyw{in}}
+\newcommand{\Ind}[2][{}]{\hphantom{#1}\makebox[0mm][r]{#2}\ }
+
+% structural nodes (tr=tree)
+\newcommand{\sub}[1]{\OB{\mathord\Yleft#1\mathord\Yright}}
+\newcommand{\tr}[2][a]{\OB{#1\sub{#2}}}
+\newcommand{\trn}[2][a]{\OB{#1\sub{\vn{#2}}}}
+
+% choices
+\newcommand{\dimMeta}{D}
+\newcommand{\chcL}{\OB{\langle}}
+\newcommand{\chcR}{\OB{\rangle}}
+\newcommand{\chc}[2][\dimMeta]{\OB{#1\chcL#2\chcR}}
+\newcommand{\chcPP}[3][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3}}}
+
+% dimensions
+\newcommand{\Dim}[2][\dimMeta]{\OB{\DIM\ \chc[#1]{#2}}}
+\newcommand{\DimIn}[3][\dimMeta]{\Dim[#1]{#2}\ \IN\ #3}
+\newcommand{\FD}[1]{\OB{\textit{FD}(#1)}}
+
+% static sharing
+\newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2 {=} #3}}
+\newcommand{\LetIn}[3]{\Let{#1}{#2}\ \IN\ #3}
+\newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
+
+% smart constructors
+\newcommand{\dimA}[2][a,b]{\DimIn[A]{#1}{#2}}
+\newcommand{\dimB}[2][c,d]{\DimIn[B]{#1}{#2}}
+\newcommand{\chcA}[1]{\chc[A]{#1}}
+\newcommand{\chcB}[1]{\chc[B]{#1}}
+\newcommand{\dcA}[2][a,b]{\dimA[#1]{\chcA{#2}}}
+\newcommand{\dcB}[2][c,d]{\dimB[#1]{\chcB{#2}}}
+
+
+%
+% choice calculus semantics
+%
+
+% tag selection
+\newcommand{\tsel}[2][\dimMeta.i]{\OB{\lfloor#2\rfloor_{#1}}}
+\newcommand{\dec}[1]{\ensuremath{[#1]}}
+
+% computing variants
+\newcommand{\variSym}{\OB{V}}
+\newcommand{\vari}[1]{\OB{\variSym(#1)}}
+
+% sharing expansion
+\newcommand{\expSym}{\OB{\mu}}
+\newcommand{\expEnv}{\OB{\rho}}
+\newcommand{\expand}[2][\expEnv]{\expSym_{#1}(#2)}
+
+% indicating plain expressions
+\newcommand{\plain}[1]{\OB{\underline{#1}}}
+
+
+% 
+% design theory
+%
+
+% equivalencies
+\newcommand{\equivSym}{\OB{\sim}}
+\newcommand{\vequiv}[2]{\OB{#1\equivSym#2}}
+\newcommand{\equalt}[3][C]{\OB{#2\equivSym_{#1}#3}}
+\newcommand{\equtag}[3][C]{\OB{#2\equivSym_{#1}#3}}
+
+% transformations
+\newcommand{\drop}[3][C]{\OB{\bar{#2}_{#1}(#3)}}
+\newcommand{\dropi}[4][C]{\OB{\bar{#2}_{#1/#3}(#4)}}
+\newcommand{\dropA}[3][C]{\dropi[#1]{\alpha}{#2}{#3}}
+\newcommand{\dropT}[3][C]{\dropi[#1]{\tau}{#2}{#3}}
+\newcommand{\dropC}[2][C]{\drop[#1]{\gamma}{#2}}
+\newcommand{\dropD}[2][C]{\drop[#1]{\delta}{#2}}
+
+
+%
+% miscellaneous
+%
+
+% CPP annotations
+\newcommand{\cpp}[1]{\##1}
+
+% CC Examples
+\newcommand{\CCname}[1]{\textit{\textrm{#1}}}
