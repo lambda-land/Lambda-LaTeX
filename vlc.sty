@@ -82,8 +82,6 @@
 \newcommand{\qsf}[3]{\qsq{#1}{#2}{\fst{#3}}}
 \newcommand{\qss}[3]{\qsq{#1}{#2}{\snd{#3}}}
 
-
-
 % generic qualified variables
 \newcommand{\gqv}{\qv{a}{\qm}}
 \newcommand{\gqvf}[2][\qm]{\qfq{a}{#2}{#1}}
@@ -152,7 +150,7 @@
 \newcommand{\com}[2]{\OB{#1\comSym#2}} 
 
 % substitution: #1=unifier, #2=type
-\newcommand{\subs}[2]{\ensuremath{#2#1}}
+\newcommand{\subs}[2]{\OB{#2#1}}
 
 % unification function
 \newcommand{\unifySym}{\textit{unify}}
@@ -181,8 +179,7 @@
 \newcommand{\mrkty}[1]{\OB{\underline{#1}}}
 \newcommand{\ustep}{\multicolumn{2}{c}{}\\ }
 \newcommand{\uconcl}{\hline\multicolumn{3}{c}{} \\[-1ex]}
-%\newcommand{\lstep}[1]{\OB{\raisebox{1pt}{{\lblsize #1}}\mathord{\downarrow}}\\ }
-\newcommand{\lstep}[2][{}]{\OB{\raisebox{1pt}{{\lblsize #2}}\mathord{\downarrow}}\hphantom{#1}\\ }
+\newcommand{\lstep}[1]{\OB{\raisebox{1pt}{{\lblsize #1}}\mathord{\downarrow}}\\ }
 \newcommand{\rstep}[2][{}]{&&\hphantom{#1}
              \OB{\mathord\downarrow\raisebox{1pt}{{\lblsize #2}}}\\ }
 \newcommand{\ret}{\textrm{return}\ }
@@ -204,9 +201,6 @@
 %
 % Rule Names
 %
-
-% rule names
-\newcommand{\rn}[1]{\TirName{#1}}
 
 % type equivalency rules
 \newcommand{\FF}{\rn{Fun}}
@@ -254,20 +248,3 @@
 \newcommand{\SSUML}{\rn{S-S-L}}
 \newcommand{\SSUMR}{\rn{S-S-R}}
 \newcommand{\SSC}{\rn{S-S-C}}
-
-% added by Sheng for proof
-% #1 = substitution, #2 = type variable, #3 = corresponding type
-\newcommand{\tieq}[3]{\ensuremath{#1[#2=#3]}}
-%\newcommand{\path}{\ensuremath{p}}
-% #1 = old type #2 = new type #3=path
-\newcommand{\diver}[3]{\ensuremath{#1[#2]|_{#3}}}
-\newcommand{\disj}[2]{\ensuremath{#1 \parallel #2}}
-\newcommand{\ints}[2]{\ensuremath{#1 \not\parallel #2}}
-\newcommand{\res}[2]{\ensuremath{#1|_{#2}}}
-\newcommand{\comp}[2]{\ensuremath{#1 \vee #2}}
-\newcommand{\zip}[2]{\ensuremath{zip(#1,#2)}}
-\newcommand{\hei}[1]{\ensuremath{height(#1)}}
-\newcommand{\pos}[1]{\ensuremath{\mathcal{P}os(#1)}}
-\newcommand{\empp}{\ensuremath{\epsilon}}
-\newcommand{\rep}[3]{\ensuremath{#1[#2]|_{#3}}}
-%\newcommand{\smgl}[2]{\ensuremath{}}

@@ -65,8 +65,10 @@
 \newcommand{\iPat}[2][i]{\OB{[#1\mathop:#2]}}
 
 % domain and range of mappings
-\newcommand{\dom}[1]{\OB{\textit{dom}(#1)}}
-\newcommand{\rng}[1]{\OB{\textit{rng}(#1)}}
+\newcommand{\domSym}{\textit{dom}}
+\newcommand{\rngSym}{\textit{rng}}
+\newcommand{\dom}[1]{\OB{\domSym(#1)}}
+\newcommand{\rng}[1]{\OB{\rngSym(#1)}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,6 +91,9 @@
 \newcommand{\ctx}[2][C]{\OB{#1[#2]}}
 
 % program/code environments
+
+% a backslash character that works in program environments
+\newcommand{\bs}{\texttt{\symbol{92}}}
 
 % renew these commands to change the size and indentation of program text
 \newcommand{\progfontsize}{\small}

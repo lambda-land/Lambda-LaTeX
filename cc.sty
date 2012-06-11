@@ -4,6 +4,7 @@
 \ProvidesPackage{cc}
 
 \RequirePackage{lambda}
+\RequirePackage{stmaryrd}
 
 
 %
@@ -28,6 +29,7 @@
 \newcommand{\chcR}{\OB{\rangle}}
 \newcommand{\chc}[2][\dimMeta]{\OB{#1\chcL#2\chcR}}
 \newcommand{\chcPP}[3][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3}}}
+\newcommand{\chcPPP}[4][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3},\prog{#4}}}
 
 % dimensions
 \newcommand{\Dim}[2][\dimMeta]{\OB{\DIM\ \chc[#1]{#2}}}
@@ -40,12 +42,15 @@
 \newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
 
 % smart constructors
-\newcommand{\dimA}[2][a,b]{\DimIn[A]{#1}{#2}}
-\newcommand{\dimB}[2][c,d]{\DimIn[B]{#1}{#2}}
+\newcommand{\Dtags}{t_1,t_2}
+\newcommand{\Atags}{a_1,a_2}
+\newcommand{\Btags}{b_1,b_2}
+\newcommand{\dimA}[2][\Atags]{\DimIn[A]{#1}{#2}}
+\newcommand{\dimB}[2][\Btags]{\DimIn[B]{#1}{#2}}
 \newcommand{\chcA}[1]{\chc[A]{#1}}
 \newcommand{\chcB}[1]{\chc[B]{#1}}
-\newcommand{\dcA}[2][a,b]{\dimA[#1]{\chcA{#2}}}
-\newcommand{\dcB}[2][c,d]{\dimB[#1]{\chcB{#2}}}
+\newcommand{\dcA}[2][\Atags]{\dimA[#1]{\chcA{#2}}}
+\newcommand{\dcB}[2][\Btags]{\dimB[#1]{\chcB{#2}}}
 
 
 %
@@ -53,7 +58,8 @@
 %
 
 % tag selection
-\newcommand{\tsel}[2][\dimMeta.i]{\OB{\lfloor#2\rfloor_{#1}}}
+\newcommand{\selMeta}{\dimMeta.i}
+\newcommand{\tsel}[2][\selMeta]{\OB{\lfloor#2\rfloor_{#1}}}
 \newcommand{\dec}[1]{\ensuremath{[#1]}}
 
 % computing variants
@@ -72,6 +78,9 @@
 % 
 % design theory
 %
+
+% inference rules
+\newcommand{\rn}[1]{\TirName{#1}}
 
 % equivalencies
 \newcommand{\equivSym}{\OB{\sim}}
@@ -93,7 +102,8 @@
 %
 
 % CPP annotations
-\newcommand{\cpp}[1]{\##1}
+\newcommand{\cpp}[1]{\prog{\##1}}
+\newcommand{\ifdef}{\cpp{ifdef}}
 
 % CC Examples
 \newcommand{\CCname}[1]{\textit{\textrm{#1}}}
