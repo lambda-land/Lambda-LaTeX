@@ -27,6 +27,7 @@ they can be shared and reused more easily.
 ## How to use ##
 
 For each library you want to use, include it with `\usepackage`, for example:
+    
     \usepackage{lambda}
 
 Below are two ways to install the libraries so that LaTeX will find them when
