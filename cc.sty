@@ -6,6 +6,13 @@
 \RequirePackage{lambda}
 \RequirePackage{stmaryrd}
 
+\RequirePackage{graphicx}
+\makeatletter
+\newcommand{\shorteq}{%
+  \settowidth{\@tempdima}{--}%
+  \resizebox{\@tempdima}{\height}{=}%
+}
+\makeatother
 
 %
 % choice calculus syntax
@@ -16,6 +23,7 @@
 \newcommand{\LET}{\CCkeyw{share}}
 \newcommand{\DIM}{\CCkeyw{dim}}
 \newcommand{\IN}{\CCkeyw{in}}
+\newcommand{\BE}{\OB{\shorteq}}
 \newcommand{\Ind}[2][{}]{\hphantom{#1}\makebox[0mm][r]{#2}\ }
 
 % structural nodes (tr=tree)
@@ -37,7 +45,7 @@
 \newcommand{\FD}[1]{\OB{\textit{FD}(#1)}}
 
 % static sharing
-\newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2 {=} #3}}
+\newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2\ \BE\ #3}}
 \newcommand{\LetIn}[3]{\Let{#1}{#2}\ \IN\ #3}
 \newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
 
