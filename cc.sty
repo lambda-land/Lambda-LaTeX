@@ -27,7 +27,9 @@
 \newcommand{\Ind}[2][{}]{\hphantom{#1}\makebox[0mm][r]{#2}\ }
 
 % structural nodes (tr=tree)
-\newcommand{\sub}[1]{\OB{\mathord\Yleft#1\mathord\Yright}}
+\newcommand{\subL}{\OB{\mathord\Yleft}}
+\newcommand{\subR}{\OB{\mathord\Yright}}
+\newcommand{\sub}[1]{\OB{\subL#1\subR}}
 \newcommand{\tr}[2][a]{\OB{#1\sub{#2}}}
 \newcommand{\trn}[2][a]{\OB{#1\sub{\vn{#2}}}}
 
