@@ -16,7 +16,7 @@
 \newcommand{\DIM}{\CCkeyw{dim}}
 \newcommand{\IN}{\CCkeyw{in}}
 \newcommand{\BE}{\OB{\shorteq}}
-\newcommand{\Ind}[2][{}]{\hphantom{#1}\makebox[0mm][r]{#2}\ }
+\newcommand{\Ind}[2][{}]{\hphantom{#1}\makebox[0mm][r]{#2}\;}
 
 % structural nodes (tr=tree)
 \newcommand{\subL}{\OB{\mathord\Yleft}}
@@ -34,13 +34,13 @@
 \newcommand{\chcPPP}[4][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3},\prog{#4}}}
 
 % dimensions
-\newcommand{\Dim}[2][\dimMeta]{\OB{\DIM\ \chc[#1]{#2}}}
-\newcommand{\DimIn}[3][\dimMeta]{\OB{\Dim[#1]{#2}\ \IN\ #3}}
+\newcommand{\Dim}[2][\dimMeta]{\OB{\DIM\;\chc[#1]{#2}}}
+\newcommand{\DimIn}[3][\dimMeta]{\OB{\Dim[#1]{#2}\;\IN\;#3}}
 \newcommand{\FD}[1]{\OB{\textit{FD}(#1)}}
 
 % static sharing
-\newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2\ \BE\ #3}}
-\newcommand{\LetIn}[3]{\OB{\Let{#1}{#2}\ \IN\ #3}}
+\newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2\;\BE\;#3}}
+\newcommand{\LetIn}[3]{\OB{\Let{#1}{#2}\;\IN\;#3}}
 \newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
 
 % smart constructors
