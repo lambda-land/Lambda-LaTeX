@@ -6,14 +6,6 @@
 \RequirePackage{lambda}
 \RequirePackage{stmaryrd}
 
-\RequirePackage{graphicx}
-\makeatletter
-\newcommand{\shorteq}{%
-  \settowidth{\@tempdima}{--}%
-  \resizebox{\@tempdima}{\height}{=}%
-}
-\makeatother
-
 %
 % choice calculus syntax
 %
@@ -43,12 +35,12 @@
 
 % dimensions
 \newcommand{\Dim}[2][\dimMeta]{\OB{\DIM\ \chc[#1]{#2}}}
-\newcommand{\DimIn}[3][\dimMeta]{\Dim[#1]{#2}\ \IN\ #3}
+\newcommand{\DimIn}[3][\dimMeta]{\OB{\Dim[#1]{#2}\ \IN\ #3}}
 \newcommand{\FD}[1]{\OB{\textit{FD}(#1)}}
 
 % static sharing
 \newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2\ \BE\ #3}}
-\newcommand{\LetIn}[3]{\Let{#1}{#2}\ \IN\ #3}
+\newcommand{\LetIn}[3]{\OB{\Let{#1}{#2}\ \IN\ #3}}
 \newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
 
 % smart constructors

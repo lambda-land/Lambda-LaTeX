@@ -70,6 +70,15 @@
 \newcommand{\dom}[1]{\OB{\domSym(#1)}}
 \newcommand{\rng}[1]{\OB{\rngSym(#1)}}
 
+% a shorter equal sign
+\RequirePackage{graphicx}
+\makeatletter
+\newcommand{\shorteq}{%
+  \settowidth{\@tempdima}{--}%
+  \resizebox{\@tempdima}{\height}{=}%
+}
+\makeatother
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Language design stuff %
