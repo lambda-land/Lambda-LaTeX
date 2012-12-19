@@ -74,9 +74,9 @@
 \RequirePackage{graphicx}
 \makeatletter
 \newcommand{\shorteq}{%
+  \textrm{%
   \settowidth{\@tempdima}{--}%
-  \resizebox{\@tempdima}{\height}{=}%
-}
+  \resizebox{\@tempdima}{\height}{=}}}
 \makeatother
 
 
@@ -111,8 +111,7 @@
 
 % verbatim code + latex macros
 \DefineVerbatimEnvironment{program}{Verbatim}
-   {baselinestretch=1.0,xleftmargin=\progind,
-    fontsize=\progfontsize,formatcom=\progformat,
+   {xleftmargin=\progind,fontsize=\progfontsize,formatcom=\progformat,
     commandchars=\\\{\},samepage=true}
 
 % non-verbatim code
