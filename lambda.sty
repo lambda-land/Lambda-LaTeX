@@ -54,7 +54,7 @@
 
 % sets and vectors
 \newcommand{\set}[1]{\OB{\{#1\}}}
-\newcommand{\setcomp}[2]{\set{#1\;|\;#2}}
+\newcommand{\setc}[2]{\set{#1\;|\;#2}}
 \newcommand{\vect}[1]{\OB{\langle#1\rangle}}
 
 % enumerations and indexing
@@ -95,7 +95,9 @@
 \newcommand{\sem}[2][{}]{\OB{\semL#2\semR_{#1}}}
 
 % substitution
-\newcommand{\subst}[3]{\OB{[#1/#2]#3}}
+% order of arguments mirrors a let-expression:
+% let v=e in e' ~> \subst{v}{e}{e'}
+\newcommand{\subst}[3]{\OB{[#2/#1]#3}}
 
 % contexts
 \newcommand{\ctx}[2][C]{\OB{#1[#2]}}
