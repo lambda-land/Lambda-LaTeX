@@ -9,10 +9,16 @@
 \RequirePackage{lambda}
 \RequirePackage{cc}
 
+% make the dimension environment optional
+\newtoggle{DimEnvT}
+\toggletrue{DimEnvT}
+\DeclareOption{nodim}{\togglefalse{DimEnvT}}
+
 % make the sharing environment optional
-\newtoggle{ShareEnv}
-\toggletrue{ShareEnv}
-\DeclareOption{noshare}{\togglefalse{ShareEnv}}
+\newtoggle{ShrEnvT}
+\toggletrue{ShrEnvT}
+\DeclareOption{noshare}{\togglefalse{ShrEnvT}}
+
 \ProcessOptions
 
 
@@ -102,15 +108,16 @@
 \newcommand{\DimEnv}{\OB{\Delta}}
 \newcommand{\TypeEnv}{\OB{\Gamma}}
 \newcommand{\ShrEnv}{\OB{\Lambda}}
-\newcommand{\optShrEnv}{\iftoggle{ShareEnv}{\OB{,\ShrEnv}}{}}
-\newcommand{\AllEnvs}{\DimEnv\optShrEnv,\TypeEnv}
+\newcommand{\optDimEnv}{\iftoggle{DimEnvT}{\OB{\DimEnv,}}{}}
+\newcommand{\optShrEnv}{\iftoggle{ShrEnvT}{\OB{\ShrEnv,}}{}}
+\newcommand{\AllEnvs}{\optDimEnv\optShrEnv\TypeEnv}
 
 % constructing environments
 \newcommand{\envEmpty}{\OB{\varnothing}}
 \newcommand{\extEnv}[2]{\OB{#1\oplus#2}}
-\newcommand{\extDimEnv}[2]{\OB{\extEnv{\DimEnv}{(#1,#2)}\optShrEnv,\TypeEnv}}
-\newcommand{\extTypeEnv}[2]{\OB{\DimEnv\optShrEnv,\extEnv{\TypeEnv}{(#1,#2)}}}
-\newcommand{\extShrEnv}[2]{\OB{\DimEnv,\extEnv{\ShrEnv}{(#1,#2)},\TypeEnv}}
+\newcommand{\extDimEnv}[2]{\OB{\extEnv{\DimEnv}{(#1,#2)},\optShrEnv\TypeEnv}}
+\newcommand{\extShrEnv}[2]{\OB{\optDimEnv\extEnv{\ShrEnv}{(#1,#2)},\TypeEnv}}
+\newcommand{\extTypeEnv}[2]{\OB{\optDimEnv\optShrEnv\extEnv{\TypeEnv}{(#1,#2)}}}
 
 % environment lookup
 \newcommand{\lookEnv}[3][\TypeEnv]{\OB{#1(#2)=#3}}
@@ -156,9 +163,13 @@
 \newcommand{\unifySym}{\textit{unify}}
 \newcommand{\unify}[3][{}]{\OB{\unifySym^{#1}(#2,#3)}}
 
-% unification items
-\newcommand{\uiSym}{\OB{\equiv^?}}
-\newcommand{\ui}[2]{\OB{#1\uiSym #2}}
+% unification problems
+\newcommand{\vuiSym}{\OB{\equiv^?}}
+\newcommand{\vui}[2]{\OB{#1\vuiSym #2}}
+
+\newcommand{\quiSym}{\OB{\equiv_q^?}}
+\newcommand{\qui}[2]{\OB{#1\quiSym #2}}
+
 
 % names for unification problems
 \newcommand{\upp}{\ensuremath{U}}
