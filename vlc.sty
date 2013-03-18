@@ -193,7 +193,8 @@
 \newcommand{\mrkty}[1]{\OB{\underline{#1}}}
 \newcommand{\ustep}{\multicolumn{2}{c}{}\\ }
 \newcommand{\uconcl}{\hline\multicolumn{3}{c}{} \\[-1ex]}
-\newcommand{\lstep}[1]{\OB{\raisebox{1pt}{{\lblsize #1}}\mathord{\downarrow}}\\ }
+\newcommand{\lstep}[2][{}]{\OB{\raisebox{1pt}{{\lblsize #2}}\mathord{\downarrow}}
+             \hphantom{~~#1}\\ }
 \newcommand{\rstep}[2][{}]{&&\hphantom{#1}
              \OB{\mathord\downarrow\raisebox{1pt}{{\lblsize #2}}}\\ }
 \newcommand{\ret}{\textrm{return}\ }
