@@ -118,7 +118,7 @@
 % extend \DimEnv with a pair (old name, new name)
 \newcommand{\extDimEnv}[2]{\OB{\extEnv{\DimEnv}{(#1,#2)},\optShrEnv\TypeEnv}}
 % extend \DimEnv only with a dimension name
-\newcommand{\extDimEnvS}[1]{\OB{\extEnv{\DimEnv}{#1},\optShrEnv,\TypeEnv}}
+\newcommand{\extDimEnvS}[1]{\OB{\extEnv{\DimEnv}{#1},\optShrEnv\TypeEnv}}
 \newcommand{\extShrEnv}[2]{\OB{\optDimEnv\extEnv{\ShrEnv}{(#1,#2)},\TypeEnv}}
 \newcommand{\extTypeEnv}[2]{\OB{\optDimEnv\optShrEnv\extEnv{\TypeEnv}{(#1,#2)}}}
 
