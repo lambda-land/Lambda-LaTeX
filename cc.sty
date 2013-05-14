@@ -87,18 +87,22 @@
 \newcommand{\rn}[1]{\TirName{#1}}
 
 % equivalencies
-\newcommand{\equivSym}{\OB{\sim}}
-\newcommand{\vequiv}[2]{\OB{#1\equivSym#2}}
-\newcommand{\equalt}[3][C]{\OB{#2\equivSym_{#1}#3}}
-\newcommand{\equtag}[3][C]{\OB{#2\equivSym_{#1}#3}}
+\newcommand{\vequivSym}{\OB{\sim}}
+\newcommand{\vequiv}[2]{\OB{#1\vequivSym#2}}
+\newcommand{\equalt}[3][C]{\OB{#2\vequivSym_{#1}#3}}
+\newcommand{\equtag}[3][C]{\OB{#2\vequivSym_{#1}#3}}
+\newcommand{\nequivSym}{\OB{\not\sim}}
+\newcommand{\nequiv}[2]{\OB{#1\nequivSym#2}}
+\newcommand{\nequalt}[3][C]{\OB{#2\nequivSym_{#1}#3}}
+\newcommand{\nequtag}[3][C]{\OB{#2\nequivSym_{#1}#3}}
 
 % transformations
-\newcommand{\drop}[3][C]{\OB{\bar{#2}_{#1}(#3)}}
-\newcommand{\dropi}[4][C]{\OB{\bar{#2}_{#1/#3}(#4)}}
+\newcommand{\drop}[3][C]{\OB{{#2}_{#1}(#3)}}
+\newcommand{\dropi}[4][C]{\OB{{#2}_{#1/#3}(#4)}}
 \newcommand{\dropA}[3][C]{\dropi[#1]{\alpha}{#2}{#3}}
 \newcommand{\dropT}[3][C]{\dropi[#1]{\tau}{#2}{#3}}
 \newcommand{\dropC}[2][C]{\drop[#1]{\gamma}{#2}}
-\newcommand{\dropD}[2][C]{\drop[#1]{\delta}{#2}}
+\newcommand{\dropD}[2][C]{\drop[#1]{\psi}{#2}}
 
 
 %
