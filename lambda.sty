@@ -4,6 +4,7 @@
 \ProvidesPackage{lambda}
 
 \RequirePackage{fancyvrb}
+\RequirePackage{twoopt}
 
 
 %%%%%%%%%%%%%%
@@ -50,6 +51,7 @@
 
 % ensure math mode (what does OB stand for?)
 \def\OB#1{\ifmmode#1\else\mbox{$#1$}\fi}
+% \newcommand{\OB}[1]{\ensuremath{#1}}
 
 %% multi-line definitions
 \newcommand{\Begindef}{\ =\ \BegindefNES}
@@ -70,6 +72,7 @@
 \newcommand{\vnButi}[3][n]{\OB{#2_1,\ldots,#2_{#3-1},#2_{#3+1},\ldots,#2_{#1}}}
 \newcommand{\cseq}[2][n]{\OB{^{#2:1..#1}}}
 \newcommand{\iPat}[2][i]{\OB{[#1\mathop:#2]}}
+\newcommandtwoopt{\ijPat}[4][i][j]{\OB{[#1\mathop:#3,#2\mathop:#4]}}
 
 % domain and range of mappings
 \newcommand{\domSym}{\textit{dom}}
@@ -121,6 +124,9 @@
 % verbatim code + latex macros
 \DefineVerbatimEnvironment{program}{Verbatim}
    {xleftmargin=\progind,fontsize=\progfontsize,formatcom=\progformat,
+    commandchars=\\\{\},samepage=true}
+\DefineVerbatimEnvironment{bprogram}{BVerbatim}
+   {fontsize=\progfontsize,formatcom=\progformat,
     commandchars=\\\{\},samepage=true}
 
 % non-verbatim code
