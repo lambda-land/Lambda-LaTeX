@@ -16,7 +16,6 @@
 \newcommand{\BE}{\OB{\shorteq}}
 \newcommand{\DIM}{\CCkeyw{dim}}
 \newcommand{\IN}{\CCkeyw{in}}
-\newcommand{\Ind}[2][{}]{\hphantom{#1}\makebox[0mm][r]{#2}\;}
 
 % structural nodes (tr=tree)
 \newcommand{\subL}{\OB{\mathord\Yleft}}
@@ -39,22 +38,29 @@
 \newcommand{\FD}[1]{\OB{\textit{FD}(#1)}}
 
 % static sharing
-\newcommand{\Let}[3][\LET]{\OB{\Ind[#1]{\LET}#2\BE\;#3}}
+\newcommand{\Let}[2]{\OB{\LET\;#1\BE\;#2}}
 \newcommand{\LetIn}[3]{\OB{\Let{#1}{#2}\;\IN\;#3}}
 \newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
 \newcommand{\BD}[1]{\OB{\textit{BD}(#1)}}
 \newcommand{\dimFree}[1]{\OB{\BD{#1}=\varnothing}}
 
 % smart constructors
-\newcommand{\Dtags}{t_1,t_2}
-\newcommand{\Atags}{a_1,a_2}
-\newcommand{\Btags}{b_1,b_2}
+\newcommand{\Atags}{\OB{a_1,a_2}}
+\newcommand{\Btags}{\OB{b_1,b_2}}
+\newcommand{\Ctags}{\OB{c_1,c_2}}
+\newcommand{\Dtags}{\OB{d_1,d_2}}
 \newcommand{\dimA}[2][\Atags]{\DimIn[A]{#1}{#2}}
 \newcommand{\dimB}[2][\Btags]{\DimIn[B]{#1}{#2}}
+\newcommand{\dimC}[2][\Ctags]{\DimIn[C]{#1}{#2}}
+\newcommand{\dimD}[2][\Dtags]{\DimIn[D]{#1}{#2}}
 \newcommand{\chcA}[1]{\chc[A]{#1}}
 \newcommand{\chcB}[1]{\chc[B]{#1}}
+\newcommand{\chcC}[1]{\chc[C]{#1}}
+\newcommand{\chcD}[1]{\chc[D]{#1}}
 \newcommand{\dcA}[2][\Atags]{\dimA[#1]{\chcA{#2}}}
 \newcommand{\dcB}[2][\Btags]{\dimB[#1]{\chcB{#2}}}
+\newcommand{\dcC}[2][\Ctags]{\dimC[#1]{\chcC{#2}}}
+\newcommand{\dcD}[2][\Dtags]{\dimD[#1]{\chcD{#2}}}
 
 
 %
