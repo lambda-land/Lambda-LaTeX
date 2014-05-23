@@ -4,6 +4,7 @@
 \ProvidesPackage{lambda}
 
 \RequirePackage{fancyvrb}
+\RequirePackage{mathptmx}
 \RequirePackage{twoopt}
 
 
@@ -99,8 +100,10 @@
                        {\end{array}\]\ignorespacesafterend}
 
 % semantics
-\newcommand{\semL}{\OB{[\![}}
-\newcommand{\semR}{\OB{]\!]}}
+% \newcommand{\semL}{\OB{[\![}}
+% \newcommand{\semR}{\OB{]\!]}}
+\newcommand{\semL}{\llbracket}
+\newcommand{\semR}{\rrbracket}
 \newcommand{\sem}[2][{}]{\OB{\semL#2\semR_{#1}}}
 
 % substitution
