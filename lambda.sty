@@ -62,8 +62,6 @@
 
 % sets and vectors
 \newcommand{\set}[1]{\OB{\{#1\}}}
-\newcommand{\setc}[2]{\set{#1\;|\;#2}}
-\newcommand{\vect}[1]{\OB{\langle#1\rangle}}
 
 % enumerations and indexing
 \newcommand{\vij}[3]{\OB{#1_{#2},\ldots,#1_{#3}}}
@@ -80,15 +78,6 @@
 \newcommand{\dom}[1]{\OB{\domSym(#1)}}
 \newcommand{\rng}[1]{\OB{\rngSym(#1)}}
 
-% a shorter equal sign
-\RequirePackage{graphicx}
-\makeatletter
-\newcommand{\shorteq}{%
-  \textrm{%
-  \settowidth{\@tempdima}{--}%
-  \resizebox{\@tempdima}{\height}{=}}}
-\makeatother
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Language design stuff %
@@ -99,8 +88,9 @@
                        {\end{array}\]\ignorespacesafterend}
 
 % semantics
-\newcommand{\semL}{\OB{[\![}}
-\newcommand{\semR}{\OB{]\!]}}
+\RequirePackage{stmaryrd}
+\newcommand{\semL}{\llbracket}
+\newcommand{\semR}{\rrbracket}
 \newcommand{\sem}[2][{}]{\OB{\semL#2\semR_{#1}}}
 
 % substitution
