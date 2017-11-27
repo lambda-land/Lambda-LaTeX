@@ -28,20 +28,20 @@
 \newcommand{\dimMeta}{D}
 \newcommand{\chcL}{\OB{\langle}}
 \newcommand{\chcR}{\OB{\rangle}}
-\newcommand{\chc}[2][\dimMeta]{\OB{\textit{#1}\chcL#2\chcR}}
+\newcommand{\chc}[2][\dimMeta]{\OB{\mathit{#1}\chcL#2\chcR}}
 \newcommand{\chcPP}[3][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3}}}
 \newcommand{\chcPPP}[4][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3},\prog{#4}}}
 
 % dimensions
 \newcommand{\Dim}[2][\dimMeta]{\OB{\DIM\;\chc[#1]{#2}}}
 \newcommand{\DimIn}[3][\dimMeta]{\OB{\Dim[#1]{#2}\;\IN\;#3}}
-\newcommand{\FD}[1]{\OB{\textit{FD}(#1)}}
+\newcommand{\FD}[1]{\OB{\mathit{FD}(#1)}}
 
 % static sharing
 \newcommand{\Let}[2]{\OB{\LET\;#1\BE\;#2}}
 \newcommand{\LetIn}[3]{\OB{\Let{#1}{#2}\;\IN\;#3}}
-\newcommand{\FV}[1]{\OB{\textit{FV}(#1)}}
-\newcommand{\BD}[1]{\OB{\textit{BD}(#1)}}
+\newcommand{\FV}[1]{\OB{\mathit{FV}(#1)}}
+\newcommand{\BD}[1]{\OB{\mathit{BD}(#1)}}
 \newcommand{\dimFree}[1]{\OB{\BD{#1}=\varnothing}}
 
 % smart constructors
