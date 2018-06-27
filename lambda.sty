@@ -4,9 +4,10 @@
 \ProvidesPackage{lambda}
 
 \RequirePackage{fancyvrb}
-\RequirePackage{mathptmx}
+% \RequirePackage{mathptmx}
 \RequirePackage{twoopt}
 
+\newcommand{\LambdaVersion}{1.1}
 
 %%%%%%%%%%%%%%
 % Meta notes %
@@ -82,13 +83,13 @@
 \newcommand{\rng}[1]{\OB{\rngSym(#1)}}
 
 % a shorter equal sign
-\RequirePackage{graphicx}
-\makeatletter
-\newcommand{\shorteq}{%
-  \textrm{%
-  \settowidth{\@tempdima}{--}%
-  \resizebox{\@tempdima}{\height}{=}}}
-\makeatother
+%\RequirePackage{graphicx}
+%\makeatletter
+%\newcommand{\shorteq}{%
+%  \textrm{%
+%  \settowidth{\@tempdima}{--}%
+%  \resizebox{\@tempdima}{\height}{=}}}
+%\makeatother
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,11 +101,10 @@
                        {\end{array}\]\ignorespacesafterend}
 
 % semantics
-% \newcommand{\semL}{\OB{[\![}}
-% \newcommand{\semR}{\OB{]\!]}}
-\newcommand{\semL}{\llbracket}
-\newcommand{\semR}{\rrbracket}
-\newcommand{\sem}[2][{}]{\OB{\semL#2\semR_{#1}}}
+%\RequirePackage{stmaryrd}
+%\newcommand{\sem}[2][{}]{\OB{\semL#2\semR_{#1}}}
+%\newcommand{\semL}{\llbracket}
+%\newcommand{\semR}{\rrbracket}
 
 % substitution
 % order of arguments mirrors a let-expression:
@@ -122,11 +122,17 @@
 % renew these commands to change the size and indentation of program text
 \newcommand{\progind}{\parindent}
 \newcommand{\progfontsize}{\small}
-\newcommand{\progformat}{}
+\newcommand{\progformat}{\tt}
 
 % verbatim code + latex macros
 \DefineVerbatimEnvironment{program}{Verbatim}
    {xleftmargin=\progind,fontsize=\progfontsize,formatcom=\progformat,
+    commandchars=\\\{\},samepage=true}
+\DefineVerbatimEnvironment{programNoCmdChr}{Verbatim}
+   {baselinestretch=1.0,xleftmargin=\progind,fontsize=\progfontsize,
+    samepage=true}
+\DefineVerbatimEnvironment{sprogram}{Verbatim}
+   {xleftmargin=\progind,fontsize=\footnotesize,formatcom=\progformat,
     commandchars=\\\{\},samepage=true}
 \DefineVerbatimEnvironment{bprogram}{BVerbatim}
    {fontsize=\progfontsize,formatcom=\progformat,
